@@ -1,1 +1,1 @@
-# Repo for react tuturials
+# Repo for react tutorials
