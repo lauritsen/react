@@ -116,8 +116,10 @@ class Game extends React.Component {
       const col = (step.moveSquareId % cols) + 1;
       const row = Math.floor(step.moveSquareId / cols) + 1;
       const moveDesc = move ? 'col: ' + col + ', row: ' + row : '';
+      const style =
+        this.state.stepNumber === move ? { fontWeight: 'bold' } : {};
       return (
-        <li key={move}>
+        <li key={move} style={style}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
           <p>{moveDesc}</p>
         </li>
