@@ -70,6 +70,7 @@ class Game extends React.Component {
       history: [
         {
           squares: Array(9).fill(null),
+          moveSquareId: null,
         },
       ],
       stepNumber: 0,
@@ -89,6 +90,7 @@ class Game extends React.Component {
       history: history.concat([
         {
           squares: squares,
+          moveSquareId: i,
         },
       ]),
       stepNumber: history.length,
@@ -110,9 +112,14 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ? 'Go to move #' + move : 'Go to game start';
+      const cols = 3;
+      const col = (step.moveSquareId % cols) + 1;
+      const row = Math.floor(step.moveSquareId / cols) + 1;
+      const moveDesc = move ? 'col: ' + col + ', row: ' + row : '';
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <p>{moveDesc}</p>
         </li>
       );
     });
