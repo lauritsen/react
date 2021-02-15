@@ -77,6 +77,7 @@ class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
+      historyDescending: false,
     };
   }
 
@@ -107,26 +108,40 @@ class Game extends React.Component {
     });
   }
 
+  toggleHistoryDirection() {
+    this.setState({
+      historyDescending: !this.state.historyDescending,
+    });
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
-    const moves = history.map((step, move) => {
-      const desc = move ? 'Go to move #' + move : 'Go to game start';
-      const cols = 3;
-      const col = (step.moveSquareId % cols) + 1;
-      const row = Math.floor(step.moveSquareId / cols) + 1;
-      const moveDesc = move ? 'col: ' + col + ', row: ' + row : '';
-      const style =
-        this.state.stepNumber === move ? { fontWeight: 'bold' } : {};
-      return (
-        <li key={move} style={style}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-          <p>{moveDesc}</p>
-        </li>
-      );
-    });
+    const moves = history
+      .map((step, move) => {
+        const desc = move ? 'Go to move #' + move : 'Go to game start';
+        const cols = 3;
+        const col = (step.moveSquareId % cols) + 1;
+        const row = Math.floor(step.moveSquareId / cols) + 1;
+        const moveDesc = move ? 'col: ' + col + ', row: ' + row : '';
+        const style =
+          this.state.stepNumber === move ? { fontWeight: 'bold' } : {};
+        return (
+          <li key={move} style={style}>
+            <button onClick={() => this.jumpTo(move)}>{desc}</button>
+            <p>{moveDesc}</p>
+          </li>
+        );
+      })
+      .sort((a, b) => {
+        if (this.state.historyDescending) {
+          return b.key - a.key;
+        } else {
+          return a.key - b.key;
+        }
+      });
 
     let status;
     if (winner) {
@@ -145,6 +160,9 @@ class Game extends React.Component {
         </div>
         <div className='game-info'>
           <div>{status}</div>
+          <button onClick={() => this.toggleHistoryDirection()}>
+            Toggle history direction
+          </button>
           <ol>{moves}</ol>
         </div>
       </div>
