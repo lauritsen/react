@@ -1,0 +1,25 @@
+.github-profile {
+  display: flex;
+  flex-direction: row;
+  background-color: lightgray;
+  margin: 16px;
+}
+
+.profile-pic {
+  width: 150px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.company {
+  font-size: 1.25rem;
+}
