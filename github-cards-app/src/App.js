@@ -7,12 +7,10 @@ import Form from './Form';
 import testData from './TestData';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      profiles: testData,
-    };
-  }
+  state = {
+    profiles: testData,
+  };
+
   render() {
     return (
       <div className='App'>
