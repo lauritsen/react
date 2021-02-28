@@ -2,6 +2,8 @@
 
 [Tic-Tac-Toe](./tic-tac-toe) - Following the [Tutorial: Intro to React](https://reactjs.org/tutorial/tutorial.html)
 
+[GitHub Cards App](./github-cards-app) - From [React: Getting Started]() on Pluralsight by Samer Buna from [JsComplete](https://jscomplete.com/)
+
 ## React's Basic Concepts
 
 1. Components
