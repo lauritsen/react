@@ -4,22 +4,23 @@ import React from 'react';
 
 import CardList from './CardList';
 import Form from './Form';
-import testData from './TestData';
 
 class App extends React.Component {
   state = {
-    profiles: testData,
+    profiles: [],
+  };
+  addNewProfile = (profileData) => {
+    this.setState((prevState) => ({
+      profiles: [...prevState.profiles, profileData],
+    }));
   };
 
   render() {
     return (
       <div className='App'>
         <h1>The GitHub Cards App</h1>
-
-        <Form />
-
+        <Form onSubmit={this.addNewProfile} />
         <CardList profiles={this.state.profiles} />
-
         <img src={logo} className='App-logo' alt='logo' />
       </div>
     );
