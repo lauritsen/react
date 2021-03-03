@@ -1,19 +1,14 @@
 import './Card.css';
 import React from 'react';
 
-class Card extends React.Component {
-  render() {
-    const profile = this.props;
-    return (
-      <div className='github-profile'>
-        <img src={profile.avatar_url} className='profile-pic' alt='profile' />
-        <div className='info'>
-          <div className='name'>{profile.name}</div>
-          <div className='company'>{profile.company}</div>
-        </div>
-      </div>
-    );
-  }
-}
+const Card = (props) => (
+  <div className='github-profile'>
+    <img src={props.profile.avatar_url} className='profile-pic' alt='profile' />
+    <div className='info'>
+      <div className='name'>{props.profile.name}</div>
+      <div className='company'>{props.profile.company}</div>
+    </div>
+  </div>
+);
 
 export default Card;
