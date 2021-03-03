@@ -1,6 +1,9 @@
 import React from 'react';
-import axios from 'axios';
+import GetGithubUser from './GithubApi';
 
+// TODO: Refactor all class components to function components
+// use hook instead of state
+// use updater function instead of setState
 class Form extends React.Component {
   state = {
     userName: '',
@@ -8,22 +11,11 @@ class Form extends React.Component {
   };
   handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios
-      .get(`https://api.github.com/users/${this.state.userName}`)
-      .catch((error) => {
-        if (error.response) {
-          this.setState({
-            errorMessage: `Error: ${error.response.status} ${error.response.data.message}`,
-          });
-        } else {
-          this.setState({
-            errorMessage: `Error: ${error.message}`,
-          });
-        }
-      });
-    if (response) {
-      this.props.onSubmit(response.data);
-      this.setState({ userName: '', errorMessage: '' });
+    const response = await GetGithubUser(this.state.userName);
+    if (response.errorMessage) {
+      this.setState(response);
+    } else {
+      this.props.onSubmit(response);
     }
   };
   render() {
@@ -32,6 +24,7 @@ class Form extends React.Component {
         <input
           type='text'
           value={this.state.userName}
+          // TODO: Extract logic about managing state to it's own component
           onChange={(event) => this.setState({ userName: event.target.value })}
           placeholder='GitHub username'
           required
