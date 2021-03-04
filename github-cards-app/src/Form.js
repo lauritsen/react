@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import GetGithubUser from './GithubApi';
 
 const Form = (props) => {
-  const [state, setState] = useState({
+  const initialState = {
     userName: '',
     errorMessage: '',
-  });
+  };
+  const [state, setState] = useState(initialState);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await GetGithubUser(state.userName);
     if (response.errorMessage) {
-      setState({ errorMessage: response.errorMessage });
+      setState({ ...state, errorMessage: response.errorMessage });
     } else {
-      setState({ userName: '' });
+      setState(initialState);
       event.target.reset();
       props.onSubmit(response.data);
     }
