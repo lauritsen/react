@@ -1,4 +1,5 @@
 import Card from './Card';
+
 const CardList = (props) => (
   <div>
     {props.profiles.map((profile) => (
