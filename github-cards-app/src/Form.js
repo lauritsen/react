@@ -11,8 +11,10 @@ const Form = (props) => {
     event.preventDefault();
     const response = await GetGithubUser(state.userName);
     if (response.errorMessage) {
-      setState({ userName: '', errorMessage: response.errorMessage });
+      setState({ errorMessage: response.errorMessage });
     } else {
+      setState({ userName: '' });
+      event.target.reset();
       props.onSubmit(response.data);
     }
   };
